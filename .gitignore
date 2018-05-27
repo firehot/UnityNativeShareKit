@@ -11,6 +11,7 @@ sysinfo.txt
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
 UnityVS/
+.vs/
 [Ee]xported[Oo]bj/
 /*.userprefs
 /*.csproj
@@ -31,7 +32,5 @@ UnityVS/
 Icon?
 ehthumbs.db
 [Tt]humbs.db
-.vs/unity-native-sharing/v15/Server/sqlite3/storage.ide-shm
-.vs/unity-native-sharing/v15/Server/sqlite3/storage.ide
-.vs/unity-native-sharing/v15/Server/sqlite3/storage.ide-wal
-.vs/unity-native-sharing/v15/Server/sqlite3/db.lock
+Assets/Plugins/NativeShare.cs.rej.meta
+Assets/Plugins/NativeShare.cs.rej
