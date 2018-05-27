@@ -31,3 +31,7 @@ UnityVS/
 Icon?
 ehthumbs.db
 [Tt]humbs.db
+.vs/unity-native-sharing/v15/Server/sqlite3/storage.ide-shm
+.vs/unity-native-sharing/v15/Server/sqlite3/storage.ide
+.vs/unity-native-sharing/v15/Server/sqlite3/storage.ide-wal
+.vs/unity-native-sharing/v15/Server/sqlite3/db.lock

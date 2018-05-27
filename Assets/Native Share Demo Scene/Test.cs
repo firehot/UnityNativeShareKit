@@ -15,7 +15,7 @@ public class Test : MonoBehaviour {
         string screenShotPath = Application.persistentDataPath + "/" + ScreenshotName;
         if(File.Exists(screenShotPath)) File.Delete(screenShotPath);
 
-        Application.CaptureScreenshot(ScreenshotName);
+        ScreenCapture.CaptureScreenshot(ScreenshotName);
 
         StartCoroutine(delayedShare(screenShotPath, text));
     }
