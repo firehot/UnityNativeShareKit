@@ -1,34 +1,42 @@
 # unity-native-sharing
 A Unity plugin to open native sharing dialogs on iOS and Android, primarily for sharing screenshots.
 
-To use, call the Share method in `NativeShare.cs`. See `NativeShare.cs` for details. For Android, you'll need to have Write Access set to External(SDCard) under Android Build Settings/Other Settings.
+## Usage:
+To use, call the Share method in [NativeShare.cs](Assets/Plugins/NativeShare.cs). See [NativeShare.cs](Assets/Plugins/NativeShare.cs) for details.
+For Android, you'll need to have Write Access set to External(SDCard) under Android Build Settings/Other Settings.
 
-You can either hook into the static actions in [NativeShare.cs](Assets/Plugins/NativeShare.cs) or pass a action for `OnFrameBeforeScreenshot` and `OnFrameAfterScreenshot` as parameters to get callbacks for when the screenshot is about to be taken, and when it has been taken. This can be useful if you need to disable some UI or banner ads and create nice screenshots for sharing. Remember if you are hooking into the static actions, that you have to unsubscribe from that action otherwise the action will try and invoke a null method.
+You can either hook into the static actions in [NativeShare.cs](Assets/Plugins/NativeShare.cs) or pass a action for `OnFrameBeforeScreenshot` and `OnFrameAfterScreenshot` as parameters to get callbacks for when the screenshot is about to be taken, and when it has been taken.
+This can be useful if you need to disable some UI or banner ads and create nice screenshots for sharing.
+Remember if you are hooking into the static actions, that you have to unsubscribe from that action otherwise the action will try and invoke a null method.
 
 Unity screenshots are run asynchronously and as such you will need to check that the file has been written, or put a delay between capturing the screenshot and sharing it using a coroutine. Otherwise you will likely end up trying to access a file that does not yet exist or will access a previous version of the screenshot.
 
-Also, note that some apps cannot reliably accept a link, image, and text at once (at least Facebook and Whatsapp). If you pass both a link and an image to Facebook, the link 'takes over' and the image will not be posted. See this comment for more info: https://github.com/ChrisMaire/unity-native-sharing/issues/19#issuecomment-282422571. Thank you ryhok for letting me know about this!
+## Notes:
+Some apps cannot reliably accept a link, image, and text at once (at least Facebook and Whatsapp).
+If you pass both a link and an image to Facebook, the link 'takes over' and the image will not be posted.
+See this comment for more info: https://github.com/ChrisMaire/unity-native-sharing/issues/19#issuecomment-282422571.
+Thank you ryhok for letting me know about this!
 
 Also note that some apps, like facebook, have stopped supporting images and text from being shared without their SDK installed
 
-This plugin combines code from:
-
-Android Native sharing by Daniele Olivieri
-http://www.daniel4d.com/blog/sharing-image-unity-android/
-
-iOS Native sharing by Tushar Sonu Lambole 
-http://tusharlambole.blogspot.com/2014/06/ios-native-plugin-for-unity3d.html
+### This plugin combines code from:
+ - Android Native sharing by Daniele Olivieri: http://www.daniel4d.com/blog/sharing-image-unity-android/
+ - iOS Native sharing by Tushar Sonu Lambole: http://tusharlambole.blogspot.com/2014/06/ios-native-plugin-for-unity3d.html
 
 Huge thank you to both of those folks for sharing their code!
 
-Documentation on Android intents
-http://developer.android.com/reference/android/content/Intent.html
-Documentation on iOS UIActivityViewController
-https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIActivityViewController_Class/index.html
+### Native Documentation:
+ - Android intents: http://developer.android.com/reference/android/content/Intent.html
+ - iOS UIActivityViewController: https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIActivityViewController_Class/index.html
 
-Built in Unity 2017.1f1 and tested on Android 5.1 (HTC One M7) and iOS 10.3 (iPhone 5C)
+### Testing
+Built in `Unity 2017.1.1f1` and tested on:
+ - `Android 5.1 (HTC One M7)`
+ - `iOS 10.3 (iPhone 5C)`
+ - `iOS 11.3.0 (iPad 2)`
 
-For iOS builds, you'll need to add a key in info.plist for `NSPhotoLibraryUsageDescription`, otherwise when the player will try and save a screenshot to their libary via the share dialog, it will crash the app with this message:
+
+For iOS builds, you'll need to add a key in the apps `info.plist` for `NSPhotoLibraryUsageDescription`, otherwise when the player will try and save a screenshot to their library via the share dialog, it will crash the app with this message:
 ```
 "[access] This app has crashed because it attempted to access privacy-sensitive data without a usage description. The app's Info.plist must contain an NSPhotoLibraryUsageDescription key with a string value explaining to the user how the app uses this data."
 ```
