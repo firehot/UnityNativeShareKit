@@ -24,8 +24,9 @@ public class Test : MonoBehaviour {
     //for it to save, or set a unique image name and check if the file has been created yet before sharing.
     IEnumerator delayedShare(string screenShotPath, string text)
     {
-        while(!File.Exists(screenShotPath)) {
-    	    yield return new WaitForSeconds(.05f);
+        while (!File.Exists(screenShotPath))
+        {
+            yield return new WaitForSecondsRealtime(0.05f);
         }
 
 		NativeShare.Share(text, screenShotPath, "", "", "image/png", true, "");
