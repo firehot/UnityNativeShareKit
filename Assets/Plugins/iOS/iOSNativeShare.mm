@@ -1,80 +1,34 @@
 #import "iOSNativeShare.h"
 
-@implementation iOSNativeShare{
-}
+@implementation iOSNativeShare
 
 #ifdef UNITY_4_0 || UNITY_5_0
-
 #import "iPhone_View.h"
-
 #else
-
 extern UIViewController* UnityGetGLViewController();
-
 #endif
 
-+(id) withTitle:(char*)title withMessage:(char*)message{
-	
-	return [[iOSNativeShare alloc] initWithTitle:title withMessage:message];
-}
-
--(id) initWithTitle:(char*)title withMessage:(char*)message{
-	
-	self = [super init];
-	
-	if( !self ) return self;
-	
-	ShowAlertMessage([[NSString alloc] initWithUTF8String:title], [[NSString alloc] initWithUTF8String:message]);
-	
-	return self;
-	
-}
-
-void ShowAlertMessage (NSString *title, NSString *message){
-	
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-	                      
-	                      message:message
-	                      
-	                      delegate:nil
-	                      
-	                      cancelButtonTitle:@"OK"
-	                      
-	                      otherButtonTitles: nil];
-	
-	[alert show];
-	
-}
-
 +(id) withText:(char*)text withFilePaths:(char*)filePaths withSubject:(char*)subject{
-	
 	return [[iOSNativeShare alloc] initWithText:text withFilePaths:filePaths withSubject:subject];
 }
 
 -(id) initWithText:(char*)text withFilePaths:(char*)filePaths withSubject:(char*)subject{
-	
 	self = [super init];
-	
 	if( !self ) return self;
+
+	NSString *mText = text ? [[NSString alloc] initWithUTF8String:text] : nil;
+	NSString *mSubject = subject ? [[NSString alloc] initWithUTF8String:subject] : nil;
+	NSString *mfilePath = filePaths ? [[NSString alloc] initWithUTF8String:filePaths] : nil;
+
+    NSMutableArray *items = [NSMutableArray new];
 	
-	
-	
-    NSString *mText = text ? [[NSString alloc] initWithUTF8String:text] : nil;
-	
-    NSString *mSubject = subject ? [[NSString alloc] initWithUTF8String:subject] : nil;
-	
-    NSString *mfilePath = filePaths ? [[NSString alloc] initWithUTF8String:filePaths] : nil;
-    
-	
-	NSMutableArray *items = [NSMutableArray new];
-	
-	if(mText != NULL && mText.length > 0){
-		
+	if(mText != NULL && mText.length > 0)
+	{
 		[items addObject:mText];
-		
 	}
 	
-	if(mfilePath != NULL && mfilePath.length > 0){
+	if(mfilePath != NULL && mfilePath.length > 0)
+	{
         NSArray *paths = [mfilePath componentsSeparatedByString:@";"];
 		int i;
 		for (i = 0; i < [paths count]; i++) {
@@ -116,7 +70,14 @@ void ShowAlertMessage (NSString *title, NSString *message){
 						[items addObject:formattedURL];
 					}
 				}else{
-                    ShowAlertMessage(@"Error", [NSString stringWithFormat:@"Cannot find file %@", path]);
+                    struct AlertMessageStruct ams;
+                    
+                    ams.alertTitle = (char*)"Error";
+                    NSString *message = [NSString stringWithFormat:@"Cannot find file %@", path];
+                    ams.alertMessage = (char*)[message UTF8String];
+                    ams.alertCancelButtonText = (char*)"OK";
+                    
+                    showAlertMessage(&ams);
 				}
 			}
 		}
@@ -156,11 +117,7 @@ void ShowAlertMessage (NSString *title, NSString *message){
 # pragma mark - C API
 iOSNativeShare* instance;
 
-void showAlertMessage(struct ConfigStruct *confStruct) {
-	instance = [iOSNativeShare withTitle:confStruct->title withMessage:confStruct->message];
-}
-
-void showSocialSharing(struct SocialSharingStruct *confStruct) {
+void showSocialSharing(struct SocialSharingStruct *confStruct){
 	instance = [iOSNativeShare withText:confStruct->text withFilePaths:confStruct->filePaths withSubject:confStruct->subject];
 }
 

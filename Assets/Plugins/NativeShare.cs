@@ -115,44 +115,93 @@ namespace NativeSharing
 #endif
 
 #if UNITY_IOS
-        public struct ConfigStruct
+        #region Alert
+        /// <summary>
+        /// Struct for iOS alerts
+        /// </summary>
+        struct AlertMessageStruct
         {
-            public string title;
-            public string message;
+            /// <summary>
+            /// Alert title
+            /// </summary>
+            public string alertTitle;
+
+            /// <summary>
+            /// Alert message
+            /// </summary>
+            public string alertMessage;
+
+            /// <summary>
+            /// Alert cancel button text
+            /// </summary>
+            public string alertCancelButtonText;
         }
 
-        [DllImport("__Internal")] static extern void showAlertMessage(ref ConfigStruct conf);
+        /// <summary>
+        /// External call to the C / Obj-C layer of the iOS app
+        /// </summary>
+        /// <param name="alertMessageStruct">The alert message information</param>
+        [DllImport("__Internal")]
+        static extern void showAlertMessage(ref AlertMessageStruct alertMessageStruct);
 
-        public struct SocialSharingStruct
+        /// <summary>
+        /// Displays a dialog box with a custom title, message and cancel button text
+        /// </summary>
+        /// <param name="alertTitle">Alert title</param>
+        /// <param name="alertMessage">Alert message</param>
+        /// <param name="alertCancelButtonText">Alert cancel button text</param>
+        public static void AlertMessageIOS(string alertTitle, string alertMessage, string alertCancelButtonText = "OK")
+        {
+            var alertMessageStruct = new AlertMessageStruct
+            {
+                alertTitle = alertTitle,
+                alertMessage = alertMessage,
+                alertCancelButtonText = alertCancelButtonText
+            };
+            showAlertMessage(ref alertMessageStruct);
+        }
+        #endregion
+
+        /// <summary>
+        /// External call to the C / Obj-C layer of the iOS app
+        /// </summary>
+        /// <param name="alertMessageStruct">The alert message information</param>
+        [DllImport("__Internal")]
+        static extern void showSocialSharing(ref SocialSharingStruct conf);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        struct SocialSharingStruct
         {
             public string text;
             public string subject;
             public string filePaths;
         }
 
-        [DllImport("__Internal")] private static extern void showSocialSharing(ref SocialSharingStruct conf);
-
-        public static void ShareIOS(string title, string message)
-        {
-            ConfigStruct conf = new ConfigStruct();
-            conf.title = title;
-            conf.message = message;
-            showAlertMessage(ref conf);
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="subject"></param>
+        /// <param name="url"></param>
+        /// <param name="filePaths"></param>
         public static void ShareIOS(string body, string subject, string url, string[] filePaths)
         {
-            SocialSharingStruct conf = new SocialSharingStruct();
-            conf.text = body;
-            string paths = string.Join(";", filePaths);
-            if (string.IsNullOrEmpty(paths))
-                paths = url;
-            else if (!string.IsNullOrEmpty(url))
-                paths += ";" + url;
-            conf.filePaths = paths;
-            conf.subject = subject;
+            var socialSharingStruct = new SocialSharingStruct
+            {
+                text = body
+            };
 
-            showSocialSharing(ref conf);
+            var paths = string.Join(";", filePaths);
+
+            if (string.IsNullOrEmpty(paths)) paths = url;
+            else if (!string.IsNullOrEmpty(url)) paths += ";" + url;
+
+            socialSharingStruct.filePaths = paths;
+            socialSharingStruct.subject = subject;
+
+            showSocialSharing(ref socialSharingStruct);
         }
 #endif
     }

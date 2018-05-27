@@ -1,33 +1,23 @@
 ﻿#import "UnityAppController.h"
+#import "iOSNativeAlert.h"
 
 @interface iOSNativeShare : UIViewController
 {
-    UINavigationController *navController;
+	UINavigationController *navController;
 }
 
-
-struct ConfigStruct {
-    char* title;
-    char* message;
-};
-
 struct SocialSharingStruct {
-    char* text;
-    char* subject;
+	char* text;
+	char* subject;
 	char* filePaths;
 };
-
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-    
-    void showAlertMessage(struct ConfigStruct *confStruct);
-    void showSocialSharing(struct SocialSharingStruct *confStruct);
-    
+	void showSocialSharing(struct SocialSharingStruct *socialSharingStruct);
 #ifdef __cplusplus
 }
 #endif
-
 
 @end
