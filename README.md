@@ -17,7 +17,7 @@ If you pass both a link and an image to Facebook, the link 'takes over' and the 
 See this comment for more info: https://github.com/ChrisMaire/unity-native-sharing/issues/19#issuecomment-282422571.
 Thank you ryhok for letting me know about this!
 
-[Also note that some apps, like Facebook, have stopped supporting images and text from being shared without their SDK installed.](https://stackoverflow.com/questions/34618514/share-text-via-intent-on-facebook-without-using-facebook-sdk)
+[Also note that some apps, like Facebook, have stopped supporting images and text from being shared without their SDK installed, but there are some workarounds that require more native code. (NOt sure if this issue is isolated to Android, requires testing.)](https://stackoverflow.com/questions/34618514/share-text-via-intent-on-facebook-without-using-facebook-sdk)
 
 ### This plugin combines code from:
  - Android Native sharing by Daniele Olivieri: http://www.daniel4d.com/blog/sharing-image-unity-android/
