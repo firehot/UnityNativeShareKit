@@ -35,7 +35,7 @@ Built in `Unity 2017.1.1f1` and tested on:
  - `iOS 11.3.0 (iPad 2)`
 
 
-For iOS builds, you'll need to add a key in the apps `info.plist` for `NSPhotoLibraryUsageDescription`, otherwise when the player will try and save a screenshot to their library via the share dialog, it will crash the app with this message:
+For iOS builds, you'll need to add a key in the apps `info.plist` for `NSPhotoLibraryUsageDescription`, otherwise when the player tries to save a screenshot to their library via the share dialog, it will crash the app with this message:
 ```
 "[access] This app has crashed because it attempted to access privacy-sensitive data without a usage description. The app's Info.plist must contain an NSPhotoLibraryUsageDescription key with a string value explaining to the user how the app uses this data."
 ```
