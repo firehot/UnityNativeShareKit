@@ -29,11 +29,16 @@ Huge thank you to both of those folks for sharing their code!
  - iOS UIActivityViewController: https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIActivityViewController_Class/index.html
 
 ### Testing
-Built in `Unity 2017.1.1f1` and tested on:
- - `Android 5.1 (HTC One M7)`
- - `iOS 10.3.3 (iPhone 5C)`
- - `iOS 11.3.0 (iPad 2)`
+Built with `Unity 2017.1.1f1`
 
+--            | `Android 5.1 (HTC One M7)` | `iOS 10.3.3 (iPhone 5C)` | `iOS 11.3.1 (iPad 2 Air)`
+------------- | -------------------------- | ------------------------ | ------------------------ 
+Message (SMS) | - | ✔ | N/A
+Email         | - | ✔ | ✔
+Facebook      | - | No Text | No Text
+Messenger     | - | No Text | No Text
+Twitter       | - | No Image | ✔
+WhatsApp      | - | (Could not WhatsApp to load properly) | N/A
 
 For iOS builds, you'll need to add a key in the apps `info.plist` for `NSPhotoLibraryUsageDescription`, otherwise when the player tries to save a screenshot to their library via the share dialog, it will crash the app with this message:
 ```
