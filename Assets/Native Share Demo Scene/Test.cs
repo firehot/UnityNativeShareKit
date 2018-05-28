@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.IO;
 using NativeSharing;
+using UnityEngine.Events;
 
 /*
  * https://github.com/ChrisMaire/unity-native-sharing
@@ -14,6 +16,14 @@ public class Test : MonoBehaviour
     [SerializeField]
     string ScreenshotName = "screenshot.png";
 
+    #region Events / Actions
+    [Header("Screenshot Actions")]
+    [SerializeField] UnityEvent OnFrameBeforeScreenshot_UnityEvent;
+    [SerializeField] UnityEvent OnFrameAfterScreenshot_UnityEvent;
+    public Action OnFrameBeforeScreenshot_Action;
+    public Action OnFrameAfterScreenshot_Action;
+    #endregion
+
     /// <summary>
     /// Shares a screenshot with text
     /// </summary>
@@ -23,6 +33,8 @@ public class Test : MonoBehaviour
         var screenShotPath = Application.persistentDataPath + "/" + ScreenshotName;
         if (File.Exists(screenShotPath)) File.Delete(screenShotPath);
 
+        if (OnFrameBeforeScreenshot_Action != null) OnFrameBeforeScreenshot_Action.Invoke();
+        if (OnFrameBeforeScreenshot_UnityEvent != null) OnFrameBeforeScreenshot_UnityEvent.Invoke();
         ScreenCapture.CaptureScreenshot(ScreenshotName);
 
         StartCoroutine(delayedShare(screenShotPath, text));
@@ -40,6 +52,8 @@ public class Test : MonoBehaviour
         {
             yield return new WaitForSecondsRealtime(0.05f);
         }
+        if (OnFrameAfterScreenshot_Action != null) OnFrameAfterScreenshot_Action.Invoke();
+        if (OnFrameAfterScreenshot_UnityEvent != null) OnFrameAfterScreenshot_UnityEvent.Invoke();
         NativeShare.Share(text, screenShotPath, "", "", "image/png", true, "");
     }
 }
