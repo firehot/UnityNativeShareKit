@@ -1,6 +1,7 @@
 ﻿#if UNITY_IOS
 using System.Runtime.InteropServices;
 #else
+using System.Runtime.InteropServices;
 using UnityEngine;
 #endif
 
@@ -41,7 +42,7 @@ namespace NativeSharing
         public static void ShareMultiple(string shareText, string[] filePaths = null, string url = null, string subject = "", string mimeType = "text/html", bool showShareDialogBox = false, string shareDialogBoxText = "Select sharing app")
         {
 #if UNITY_ANDROID
-            ShareAndroid(shareText, subject, url, filePaths, mimeType, showShareDialogBox, shareDialogBoxText);
+            ShareAndroid(shareText, filePaths, showShareDialogBox, shareDialogBoxText);
 #elif UNITY_IOS
             ShareIOS(shareText, subject, url, filePaths);
 #else
@@ -52,6 +53,11 @@ namespace NativeSharing
         }
 
 #if UNITY_ANDROID
+
+        const string packageName = "com.NicholasSheehan.Unity_Native_Sharing";
+        const string className = "Sharing";
+        const string methodName = "OpenShareDialog";
+
         /// <summary>
         /// Shares multiple files at once
         /// </summary>
@@ -63,53 +69,12 @@ namespace NativeSharing
         ///     <para><seealso cref="https://www.freeformatter.com/mime-types-list.html"/></para></param>
         /// <param name="showShareDialogBox">Should the share dialog be opened</param>
         /// <param name="shareDialogBoxText">The text to show on the share dialog</param>
-        public static void ShareAndroid(string shareText, string subject, string url, string[] filePaths, string mimeType, bool showShareDialogBox, string shareDialogBoxText)
+        public static void ShareAndroid(string shareText, string[] filePaths, bool showShareDialogBox, string shareDialogBoxText)
         {
-            using (AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent"))
-            using (AndroidJavaObject intentObject = new AndroidJavaObject("android.content.Intent"))
+            using (var sharingJavaClass = new AndroidJavaClass(packageName + "." + className))
             {
-                using (intentObject.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND"))) { }
-                using (intentObject.Call<AndroidJavaObject>("setType", mimeType)) { }
-                using (intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_SUBJECT"), subject)) { }
-                using (intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), shareText)) { }
-
-                if (!string.IsNullOrEmpty(url))
-                {
-                    // attach url
-                    using (AndroidJavaClass uriClass = new AndroidJavaClass("android.net.Uri"))
-                    using (AndroidJavaObject uriObject = uriClass.CallStatic<AndroidJavaObject>("parse", url))
-                    using (intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_STREAM"), uriObject)) { }
-                }
-                else if (filePaths != null)
-                {
-                    // attach extra files (pictures, pdf, etc.)
-                    using (AndroidJavaClass uriClass = new AndroidJavaClass("android.net.Uri"))
-                    using (AndroidJavaObject uris = new AndroidJavaObject("java.util.ArrayList"))
-                    {
-                        for (var i = 0; i < filePaths.Length; i++)
-                        {
-                            //instantiate the object Uri with the parse of the url's file
-                            using (AndroidJavaObject uriObject = uriClass.CallStatic<AndroidJavaObject>("parse", "file://" + filePaths[i]))
-                                uris.Call<bool>("add", uriObject);
-                        }
-                        using (intentObject.Call<AndroidJavaObject>("putParcelableArrayListExtra", intentClass.GetStatic<string>("EXTRA_STREAM"), uris)) { }
-                    }
-                }
-
-                // finally start application
-                using (AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
-                using (AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity"))
-                {
-                    if (showShareDialogBox)
-                    {
-                        AndroidJavaObject jChooser = intentClass.CallStatic<AndroidJavaObject>("createChooser", intentObject, shareDialogBoxText);
-                        currentActivity.Call("startActivity", jChooser);
-                    }
-                    else
-                    {
-                        currentActivity.Call("startActivity", intentObject);
-                    }
-                }
+                Debug.Log(filePaths[0]);
+                sharingJavaClass.CallStatic(methodName, shareText, filePaths[0], showShareDialogBox, shareDialogBoxText);
             }
         }
 #endif
