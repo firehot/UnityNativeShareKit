@@ -22,7 +22,7 @@ Built with `Unity 2017.1.1f1`
 
 #### Screenshot and text
 Some apps cannot reliably accept a image and text at once (at least Facebook, Messenger and Instagram, thanks Facebook).
-[Also note that some apps, like Facebook, have stopped supporting images and text from being shared without their SDK installed, but there are some workarounds that require more native code. (NOt sure if this issue is isolated to Android, requires testing.)](https://stackoverflow.com/questions/34618514/share-text-via-intent-on-facebook-without-using-facebook-sdk)
+[Also note that some apps, like Facebook, have stopped supporting images and text from being shared without their SDK installed, but there are some workarounds that require more native code. (Not sure if this issue is isolated to Android, requires testing.)](https://stackoverflow.com/questions/34618514/share-text-via-intent-on-facebook-without-using-facebook-sdk)
 
 --            | `Android 8.0.0 (OnePlus 3T / OxygenOS 5.0.1)`| `iOS 10.3.3 (iPhone 5C)`              | `iOS 11.3.1 (iPad 2 Air)`
 ------------- | ---------------------------------------------| --------------------------------------| ------------------------ 
@@ -47,6 +47,7 @@ The Android plugin has support for [Play Services Resolver for Unity](https://gi
 
 ### Credits
 by Nicholas Sheehan (http://www.twitter.com/NSheehanDev)
+
 [www.NicholasSheehan.co.uk](www.NicholasSheehan.co.uk)
 
 [Repo forked from unity-native-sharing](https://github.com/ChrisMaire/unity-native-sharing)
