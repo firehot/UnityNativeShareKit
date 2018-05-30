@@ -15,7 +15,7 @@ import java.io.File;
 
 public class Sharing {
 
-    public static void OpenShareDialog(String shareText, String filePath, boolean showShareDialog, String shareDialogBoxText){
+    public static void OpenShareDialog(String shareText, String fileName, boolean showShareDialog, String shareDialogBoxText){
 
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
@@ -23,8 +23,11 @@ public class Sharing {
         intent.putExtra(Intent.EXTRA_TEXT, shareText);
 
         Context unityContext = UnityPlayer.currentActivity.getApplicationContext();
+        File imagePath = new File(unityContext.getFilesDir(), "screenshots");
+        File newFile = new File(imagePath, fileName);
+
         //Uri imageUri = SharingFileProvider.getUriForFile(unityContext, unityContext.getApplicationContext().getPackageName() + ".provider", new File(filePath));
-        Uri imageUri = SharingFileProvider.getUriForFile(unityContext, BuildConfig.APPLICATION_ID + ".provider", new File(filePath));
+        Uri imageUri = FileProvider.getUriForFile(unityContext, BuildConfig.APPLICATION_ID + ".provider", newFile);
 
         intent.putExtra(Intent.EXTRA_STREAM, imageUri);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
