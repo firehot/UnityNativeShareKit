@@ -24,7 +24,7 @@ public class Sharing {
 
         Context unityContext = UnityPlayer.currentActivity.getApplicationContext();
         //Uri imageUri = SharingFileProvider.getUriForFile(unityContext, unityContext.getApplicationContext().getPackageName() + ".provider", new File(filePath));
-        Uri imageUri = SharingFileProvider.getUriForFile(unityContext, BuildConfig.APPLICATION_ID + ".provider", new File(filePath));
+        Uri imageUri = FileProvider.getUriForFile(unityContext, BuildConfig.APPLICATION_ID + ".provider", new File(filePath));
 
         intent.putExtra(Intent.EXTRA_STREAM, imageUri);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

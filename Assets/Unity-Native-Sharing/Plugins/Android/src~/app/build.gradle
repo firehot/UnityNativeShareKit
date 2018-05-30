@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "nicholassheehan.unity_native_sharing"
+        applicationId "com.nicholassheehan.unity_native_sharing"
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
