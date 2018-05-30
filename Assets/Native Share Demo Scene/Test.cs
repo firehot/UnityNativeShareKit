@@ -56,6 +56,6 @@ public class Test : MonoBehaviour
         }
         if (OnFrameAfterScreenshot_Action != null) OnFrameAfterScreenshot_Action.Invoke();
         if (OnFrameAfterScreenshot_UnityEvent != null) OnFrameAfterScreenshot_UnityEvent.Invoke();
-        NativeShare.Share(text, screenShotPath, "", "", "image/png", true, "");
+        NativeShare.Share(text, screenshotName, "", "", "image/png", true, "");
     }
 }

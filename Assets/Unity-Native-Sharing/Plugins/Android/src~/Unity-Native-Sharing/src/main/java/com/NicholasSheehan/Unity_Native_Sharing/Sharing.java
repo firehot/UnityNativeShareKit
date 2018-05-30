@@ -3,7 +3,9 @@ package com.NicholasSheehan.Unity_Native_Sharing;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.BuildConfig;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 
 import com.unity3d.player.UnityPlayer;
 
@@ -22,12 +24,17 @@ public class Sharing {
         intent.setType("image/png");
         intent.putExtra(Intent.EXTRA_TEXT, shareText);
 
-        Context unityContext = UnityPlayer.currentActivity.getApplicationContext();
-        File imagePath = new File(unityContext.getFilesDir(), "screenshots");
-        File newFile = new File(imagePath, fileName);
 
-        //Uri imageUri = SharingFileProvider.getUriForFile(unityContext, unityContext.getApplicationContext().getPackageName() + ".provider", new File(filePath));
-        Uri imageUri = FileProvider.getUriForFile(unityContext, BuildConfig.APPLICATION_ID + ".provider", newFile);
+        Log.i("Unity", "fileName = " + fileName);
+
+        Context unityContext = UnityPlayer.currentActivity.getApplicationContext();
+        File newFile = new File(unityContext.getExternalFilesDir(null), fileName);
+        Log.i("Unity", "Java Screenshot path = " + newFile);
+
+        String auth = unityContext.getPackageName() + ".provider";
+        Uri imageUri = FileProvider.getUriForFile(unityContext, auth, newFile);
+
+        Log.i("Unity", "imageUri = " + imageUri);
 
         intent.putExtra(Intent.EXTRA_STREAM, imageUri);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

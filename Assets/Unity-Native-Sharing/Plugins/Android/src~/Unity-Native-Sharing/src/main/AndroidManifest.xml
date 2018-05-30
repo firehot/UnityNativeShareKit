@@ -1,11 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.NicholasSheehan.Unity_Native_Sharing">
 
-    <application
-        android:name="android.support.multidex.MultiDexApplication" >
+    <!--<application-->
+        <!--android:name="android.support.multidex.MultiDexApplication" >-->
+    <application >
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.SharingFileProvider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
