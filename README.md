@@ -31,18 +31,28 @@ Huge thank you to both of those folks for sharing their code!
 ### Testing
 Built with `Unity 2017.1.1f1`
 
---            | `Android 8.0.0 (OnePlus 3T / OxygenOS 5.0.1)` | `iOS 10.3.3 (iPhone 5C)` | `iOS 11.3.1 (iPad 2 Air)`
-------------- | --------------------------------------------- | ------------------------ | ------------------------ 
-Facebook      | No Text | No Text | No Text
-Messenger     | No Text | No Text | No Text
-Twitter       | No Image | No Image | ✔
-WhatsApp      | ✔ | (Could not WhatsApp to load properly) | N/A
+--            | `Android 8.0.0 (OnePlus 3T / OxygenOS 5.0.1)`| `iOS 10.3.3 (iPhone 5C)`              | `iOS 11.3.1 (iPad 2 Air)`
+------------- | ---------------------------------------------| --------------------------------------| ------------------------ 
+Facebook      | No Text                                      | No Text                               | No Text
+Messenger     | No Text                                      | No Text                               | No Text
+Twitter       | ✔                                           | No Image                              | ✔
+WhatsApp      | ✔                                           | (Could not WhatsApp to load properly) | N/A
 
+### Platform Notes
+#### iOS
 For iOS builds, you'll need to add a key in the apps `info.plist` for `NSPhotoLibraryUsageDescription`, otherwise when the player tries to save a screenshot to their library via the share dialog, it will crash the app with this message:
 ```
 "[access] This app has crashed because it attempted to access privacy-sensitive data without a usage description. The app's Info.plist must contain an NSPhotoLibraryUsageDescription key with a string value explaining to the user how the app uses this data."
 ```
 
+#### Android
+The android plugin requires the `android.support-v4:26.1.0` library to run.
+
+
+The android plugin has support for [Play Services Resolver for Unity](https://github.com/googlesamples/unity-jar-resolver), so no need to go and find the library files manually and worry about library conflicts with other plugins.
+
+
+### Credits
 by Christopher Maire (http://www.twitter.com/DINOSAURSSSSSSS)
 www.chrismaire.com
 
