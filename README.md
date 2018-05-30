@@ -2,8 +2,12 @@
 A Unity plugin to open native sharing dialogs on iOS and Android, primarily for sharing screenshots.
 
 ## Usage:
+<<<<<<< HEAD
 To use, call the Share method in [NativeShare.cs](UnityNativeShareKit/Assets/Plugins/NativeShare.cs). See the comments in [NativeShare.cs](UnityNativeShareKit/Assets/Plugins/NativeShare.cs) for details.
 For Android, you'll need to have Write Access set to External(SDCard) under Android Build Settings/Other Settings.
+=======
+To use, call the Share method in [NativeShare.cs](Unity-Native-Sharing/Assets/Plugins/NativeShare.cs). See the comments in [NativeShare.cs](Unity-Native-Sharing/Assets/Plugins/NativeShare.cs) for details.
+>>>>>>> 6b9da52b75ef261ad7c2fd25922e220c2fe0f808
 
 You can hook into the actions in [Test.cs](Assets/Native%20Share%20Demo%20Scene/Test.cs) to get callbacks for when the screenshot is about to be taken, and when it has been taken. The callbacks can also be accessed via the Inspector.
 This can be useful if you need to disable some UI or banner ads and create nice screenshots for sharing.
@@ -18,14 +22,12 @@ Thank you ryhok for letting me know about this!
 
 [Also note that some apps, like Facebook, have stopped supporting images and text from being shared without their SDK installed, but there are some workarounds that require more native code. (NOt sure if this issue is isolated to Android, requires testing.)](https://stackoverflow.com/questions/34618514/share-text-via-intent-on-facebook-without-using-facebook-sdk)
 
-### This plugin combines code from:
- - Android Native sharing by Daniele Olivieri: http://www.daniel4d.com/blog/sharing-image-unity-android/
+### This plugin contains code from:
  - iOS Native sharing by Tushar Sonu Lambole: http://tusharlambole.blogspot.com/2014/06/ios-native-plugin-for-unity3d.html
-
-Huge thank you to both of those folks for sharing their code!
 
 ### Native Documentation:
  - Android Intents: http://developer.android.com/reference/android/content/Intent.html
+ - Android FileProvider: https://developer.android.com/reference/android/support/v4/content/FileProvider
  - iOS UIActivityViewController: https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIActivityViewController_Class/index.html
 
 ### Testing
@@ -35,8 +37,8 @@ Built with `Unity 2017.1.1f1`
 ------------- | ---------------------------------------------| --------------------------------------| ------------------------ 
 Facebook      | No Text                                      | No Text                               | No Text
 Messenger     | No Text                                      | No Text                               | No Text
-Twitter       | ✔                                           | No Image                              | ✔
-WhatsApp      | ✔                                           | (Could not WhatsApp to load properly) | N/A
+Twitter       | ✔                                           | No Image                               | ✔
+WhatsApp      | ✔                                           | (WhatsApp not loading properly) | N/A
 
 ### Platform Notes
 #### iOS
@@ -46,10 +48,10 @@ For iOS builds, you'll need to add a key in the apps `info.plist` for `NSPhotoLi
 ```
 
 #### Android
-The android plugin requires the `android.support-v4:26.1.0` library to run.
+The android plugin requires `android.support-v4:26.1.0` to run.
 
 
-The android plugin has support for [Play Services Resolver for Unity](https://github.com/googlesamples/unity-jar-resolver), so no need to go and find the library files manually and worry about library conflicts with other plugins.
+The android plugin has support for [Play Services Resolver for Unity](https://github.com/googlesamples/unity-jar-resolver), so no need to go and find the library files manually and worry about library conflicts with other plugins. By default, [Play Services Resolver for Unity](https://github.com/googlesamples/unity-jar-resolver) is not included in the project.
 
 
 ### Credits
