@@ -6,22 +6,47 @@ using UnityEngine;
 
 namespace UnityNativeShareKit
 {
+    //TODO URLS
+    //TODO files?
+    //TODO emails?
+    //TODO Create runtime gifs?
+    //TODO facebook / messenger SDK intergration
     public static class NativeWrapper
     {
         /// <summary>
-        /// Shares a file
+        /// Android package name
+        /// </summary>
+        const string packageName = "com.NicholasSheehan.UnityNativeShareKit";
+
+        /// <summary>
+        /// Android class name
+        /// </summary>
+        const string className = "Sharing";
+
+        /// <summary>
+        /// Android method name to call to share a screenshot
+        /// </summary>
+        const string shareScreenshotMethodName = "OpenShareDialog";
+
+        /// <summary>
+        /// Shares a screenshot with text
         /// </summary>
         /// <param name="shareText">Text to share</param>
         /// <param name="filePath">The path to the attached file</param>
-        /// <param name="url">URL to the attached link</param>
-        /// <param name="subject">Subject of the share (used for Emails)</param>
-        /// <param name="mimeType">The mime type of the content to share
-        ///     <para><seealso cref="https://www.freeformatter.com/mime-types-list.html"/></para></param>
-        /// <param name="showShareDialogBox">Should the share dialog be opened</param>
-        /// <param name="shareDialogBoxText">The text to show on the share dialog</param>
-        public static void Share(string shareText, string filePath = null, string url = null, string subject = "", string mimeType = "text/html", bool showShareDialogBox = false, string shareDialogBoxText = "Select sharing app")
+        /// <param name="showShareDialogBox">Should the share dialog be opened (Android only)</param>
+        /// <param name="shareDialogBoxText">The text to show on the share dialog (Android only)</param>
+        public static void ShareScreenshot(string shareText, string filePath, bool showShareDialogBox = true, string shareDialogBoxText = "Select App To Share With")
         {
-            ShareMultiple(shareText, new[] { filePath }, url, subject, mimeType, showShareDialogBox, shareDialogBoxText);
+#if UNITY_EDITOR
+            Debug.Log("Attempting to share a screenshot with the text \"" + shareText + "\"");
+#elif UNITY_ANDROID
+            using (var sharingJavaClass = new AndroidJavaClass(packageName + "." + className))
+            {
+                sharingJavaClass.CallStatic(methodName, shareText, filePath, showShareDialogBox, shareDialogBoxText);
+            }
+#elif UNITY_IOS
+            //TODO
+#endif
         }
 
         /// <summary>
@@ -38,7 +63,7 @@ namespace UnityNativeShareKit
         public static void ShareMultiple(string shareText, string[] filePaths = null, string url = null, string subject = "", string mimeType = "text/html", bool showShareDialogBox = false, string shareDialogBoxText = "Select sharing app")
         {
 #if UNITY_ANDROID
-            ShareAndroid(shareText, filePaths, showShareDialogBox, shareDialogBoxText);
+            //ShareAndroid(shareText, filePaths, showShareDialogBox, shareDialogBoxText);
 #elif UNITY_IOS
             ShareIOS(shareText, subject, url, filePaths);
 #else
@@ -48,35 +73,8 @@ namespace UnityNativeShareKit
 #endif
         }
 
-#if UNITY_ANDROID
-
-        const string packageName = "com.NicholasSheehan.UnityNativeShareKit";
-        const string className = "Sharing";
-        const string methodName = "OpenShareDialog";
-
-        /// <summary>
-        /// Shares multiple files at once
-        /// </summary>
-        /// <param name="shareText">Text to share</param>
-        /// <param name="filePaths">The paths to the attached files</param>
-        /// <param name="url">URL to the attached link</param>
-        /// <param name="subject">Subject of the share (used for Emails)</param>
-        /// <param name="mimeType">The mime type of the content to share
-        ///     <para><seealso cref="https://www.freeformatter.com/mime-types-list.html"/></para></param>
-        /// <param name="showShareDialogBox">Should the share dialog be opened</param>
-        /// <param name="shareDialogBoxText">The text to show on the share dialog</param>
-        public static void ShareAndroid(string shareText, string[] filePaths, bool showShareDialogBox, string shareDialogBoxText)
-        {
-            using (var sharingJavaClass = new AndroidJavaClass(packageName + "." + className))
-            {
-                Debug.Log(filePaths[0]);
-                sharingJavaClass.CallStatic(methodName, shareText, filePaths[0], showShareDialogBox, shareDialogBoxText);
-            }
-        }
-#endif
-
 #if UNITY_IOS
-        #region Alert
+#region Alert
         /// <summary>
         /// Struct for iOS alerts
         /// </summary>
@@ -121,7 +119,7 @@ namespace UnityNativeShareKit
             };
             showAlertMessage(ref alertMessageStruct);
         }
-        #endregion
+#endregion
 
         /// <summary>
         /// External call to the C / Obj-C layer of the iOS app
