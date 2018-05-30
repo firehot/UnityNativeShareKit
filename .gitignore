@@ -7,6 +7,9 @@
 [Ll]ibrary/
 sysinfo.txt
  
+Assets/Plugins/
+Assets/PlayServicesResolver/
+ 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
@@ -34,3 +37,5 @@ ehthumbs.db
 [Tt]humbs.db
 Assets/Plugins/NativeShare.cs.rej.meta
 Assets/Plugins/NativeShare.cs.rej
+ProjectSettings/GvhProjectSettings.xml
+ProjectSettings/AndroidResolverDependencies.xml
