@@ -14,7 +14,7 @@ public class Test : MonoBehaviour
     /// Name of the screenshot
     /// </summary>
     [SerializeField]
-    string ScreenshotName = "screenshot.png";
+    string screenshotName = "screenshot.png";
 
     #region Events / Actions
     [Header("Screenshot Actions")]
@@ -30,12 +30,14 @@ public class Test : MonoBehaviour
     /// <param name="text">Text to share along side the screenshot</param>
     public void ShareScreenshotWithText(string text)
     {
-        var screenShotPath = Application.persistentDataPath + "/" + ScreenshotName;
+        var screenShotPath = Application.persistentDataPath + "/" + screenshotName;
         if (File.Exists(screenShotPath)) File.Delete(screenShotPath);
+
+        print("Screenshot path = " + screenshotName + "\r\nFull path = " + screenShotPath);
 
         if (OnFrameBeforeScreenshot_Action != null) OnFrameBeforeScreenshot_Action.Invoke();
         if (OnFrameBeforeScreenshot_UnityEvent != null) OnFrameBeforeScreenshot_UnityEvent.Invoke();
-        ScreenCapture.CaptureScreenshot(ScreenshotName);
+        ScreenCapture.CaptureScreenshot(screenshotName);
 
         StartCoroutine(delayedShare(screenShotPath, text));
     }
