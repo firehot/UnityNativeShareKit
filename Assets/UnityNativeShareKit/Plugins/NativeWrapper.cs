@@ -10,7 +10,6 @@ namespace UnityNativeShareKit
     //TODO files?
     //TODO emails?
     //TODO Create runtime gifs?
-    //TODO facebook / messenger SDK intergration
     public static class NativeWrapper
     {
         /// <summary>
