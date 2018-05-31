@@ -6,26 +6,24 @@ using UnityEngine;
 
 namespace UnityNativeShareKit
 {
-    //TODO URLS
-    //TODO files?
-    //TODO emails?
-    //TODO Create runtime gifs?
     public static class NativeWrapper
     {
+        #region Android Constants
         /// <summary>
         /// Android package name
         /// </summary>
-        const string packageName = "com.NicholasSheehan.UnityNativeShareKit";
+        const string androidPackageName = "com.NicholasSheehan.UnityNativeShareKit";
 
         /// <summary>
         /// Android class name
         /// </summary>
-        const string className = "Sharing";
+        const string androidClassName = "Sharing";
 
         /// <summary>
-        /// Android method name to call to share a screenshot
+        /// Android method name to call to share a screenshot with text
         /// </summary>
-        const string shareScreenshotMethodName = "OpenShareDialog";
+        const string shareScreenshotWithTextMethodName = "OpenShareDialog";
+        #endregion
 
         /// <summary>
         /// Shares a screenshot with text
@@ -73,7 +71,7 @@ namespace UnityNativeShareKit
         }
 
 #if UNITY_IOS
-#region Alert
+        #region Alert
         /// <summary>
         /// Struct for iOS alerts
         /// </summary>
@@ -99,7 +97,7 @@ namespace UnityNativeShareKit
         /// External call to the C / Obj-C layer of the iOS app
         /// </summary>
         /// <param name="alertMessageStruct">The alert message information</param>
-        [DllImport("__Internal")]
+        [System.Runtime.InteropServices.DllImport("__Internal")]
         static extern void showAlertMessage(ref AlertMessageStruct alertMessageStruct);
 
         /// <summary>
@@ -118,13 +116,13 @@ namespace UnityNativeShareKit
             };
             showAlertMessage(ref alertMessageStruct);
         }
-#endregion
+        #endregion
 
         /// <summary>
         /// External call to the C / Obj-C layer of the iOS app
         /// </summary>
         /// <param name="alertMessageStruct">The alert message information</param>
-        [DllImport("__Internal")]
+        [System.Runtime.InteropServices.DllImport("__Internal")]
         static extern void showSocialSharing(ref SocialSharingStruct conf);
 
         /// <summary>

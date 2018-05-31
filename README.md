@@ -45,6 +45,10 @@ The Android plugin requires `android.support-v4:26.1.0` to run.
 
 The Android plugin has support for [Play Services Resolver for Unity](https://github.com/googlesamples/unity-jar-resolver), so no need to go and find the library files manually and worry about library conflicts with other plugins. By default, [Play Services Resolver for Unity](https://github.com/googlesamples/unity-jar-resolver) is not included in the project.
 
+### Todo
+ - [] URL / Link Sharing w/ Text
+ - [] Runtime gifs
+
 ### Credits
 by Nicholas Sheehan (http://www.twitter.com/NSheehanDev)
 
