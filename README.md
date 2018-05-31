@@ -1,6 +1,8 @@
 # UnityNativeShareKit
 A Unity plugin to open native sharing dialogs on iOS and Android, used mainly for sharing screenshots.
 
+Please note, if you are coming from Unity-Native-Share, that some of the method calls have chaged, this is a part of an ongoing refactor to help make the plugin more modular, which should help with narrowing down bugs and also creating new features without introducing bugs else where, als0 300+ line classes aren't fun or practical.
+
 ## Usage:
 To use, call the Share method in [NativeShare.cs](UnityNativeShareKit/Assets/Plugins/NativeShare.cs). See the comments in [NativeShare.cs](UnityNativeShareKit/Assets/Plugins/NativeShare.cs) for details.
 
@@ -46,8 +48,12 @@ The Android plugin requires `android.support-v4:26.1.0` to run.
 The Android plugin has support for [Play Services Resolver for Unity](https://github.com/googlesamples/unity-jar-resolver), so no need to go and find the library files manually and worry about library conflicts with other plugins. By default, [Play Services Resolver for Unity](https://github.com/googlesamples/unity-jar-resolver) is not included in the project.
 
 ### Todo
- - [] URL / Link Sharing w/ Text
- - [] Runtime gifs
+Move all existing issues in the original repo and fix them here
+
+[Using a tool called Issue Mover for GitHub](https://github-issue-mover.appspot.com/)
+
+- [ ] URL / Link Sharing w/ Text
+- [ ] Runtime gifs
 
 ### Credits
 by Nicholas Sheehan (http://www.twitter.com/NSheehanDev)
