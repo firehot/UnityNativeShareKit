@@ -15,6 +15,12 @@ namespace UnityNativeShareKit
         string screenshotName = "screenshot.png";
 
         /// <summary>
+        /// Text to share with the screenshot
+        /// </summary>
+        [SerializeField]
+        string shareText = "This is a share text example";
+
+        /// <summary>
         /// Amount to upscale the image by
         /// </summary>
         [Range(1, 4)]
@@ -35,6 +41,14 @@ namespace UnityNativeShareKit
         [SerializeField]
         UnityEvent OnFrameAfterScreenshot;
         #endregion
+
+        /// <summary>
+        /// Takes and shares a screenshot with text
+        /// </summary>
+        public void ShareScreenshotWithText()
+        {
+            ShareScreenshotWithText(shareText);
+        }
 
         /// <summary>
         /// Takes and shares a screenshot with text
@@ -61,7 +75,7 @@ namespace UnityNativeShareKit
                 yield return new WaitForSecondsRealtime(0.05f);
             }
             if (OnFrameAfterScreenshot != null) OnFrameAfterScreenshot.Invoke();
-            NativeWrapper.ShareScreenshot(text, screenshotPath, true, "Select app to share screenshot on");
+            NativeWrapper.ShareScreenshotAndText(text, screenshotPath, true, "Select app to share screenshot on");
         }
     }
 }

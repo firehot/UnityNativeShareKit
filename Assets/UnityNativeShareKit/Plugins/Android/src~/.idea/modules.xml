@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://G:\unity-native-sharing\Assets\UnityNativeShareKit\Plugins\Android\src~\UnityNativeToolkit\Unity-Native-Sharing.iml" filepath="G:\unity-native-sharing\Assets\UnityNativeShareKit\Plugins\Android\src~\UnityNativeToolkit\Unity-Native-Sharing.iml" />
-      <module fileurl="file://$PROJECT_DIR$/UnityNativeShareKit/UnityNativeToolkit.iml" filepath="$PROJECT_DIR$/UnityNativeShareKit/UnityNativeToolkit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UnityNativeShareKit/UnityNativeShareKit.iml" filepath="$PROJECT_DIR$/UnityNativeShareKit/UnityNativeShareKit.iml" />
+      <module fileurl="file://G:\UnityNativeShareKit\Assets\UnityNativeShareKit\Plugins\Android\src~\UnityNativeShareKit\UnityNativeToolkit.iml" filepath="G:\UnityNativeShareKit\Assets\UnityNativeShareKit\Plugins\Android\src~\UnityNativeShareKit\UnityNativeToolkit.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/src~.iml" filepath="$PROJECT_DIR$/src~.iml" />
     </modules>

@@ -12,12 +12,12 @@ namespace UnityNativeShareKit
         /// Text to share
         /// </summary>
         [SerializeField]
-        string textToShare = "";
+        string textToShare = "This is example share text";
 
         /// <summary>
         /// Called via a button to share the text to an app
         /// </summary>
-        public void ShareText_Button()
+        public void ShareTextToApp()
         {
             ShareTextToApp(textToShare);
         }
@@ -28,7 +28,7 @@ namespace UnityNativeShareKit
         /// <param name="text">Text to share</param>
         public void ShareTextToApp(string text)
         {
-            //TODO
+           NativeWrapper.ShareText(text);
         }
     }
 }

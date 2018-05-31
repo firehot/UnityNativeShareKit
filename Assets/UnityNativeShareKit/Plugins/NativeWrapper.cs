@@ -1,14 +1,89 @@
-﻿#if UNITY_IOS
-using System.Runtime.InteropServices;
-#else
-using UnityEngine;
-#endif
+﻿using UnityEngine;
 
 namespace UnityNativeShareKit
 {
     public static class NativeWrapper
     {
-        #region Android Constants
+        /// <summary>
+        /// Shares a screenshot with text
+        /// </summary>
+        /// <param name="shareText">Text to share</param>
+        /// <param name="filePath">The path to the attached file</param>
+        /// <param name="showShareDialogBox">Should the share dialog be opened (Android only)</param>
+        /// <param name="shareDialogBoxText">The text to show on the share dialog (Android only)</param>
+        public static void ShareScreenshotAndText(string shareText, string filePath, bool showShareDialogBox = true, string shareDialogBoxText = "Select App To Share With")
+        {
+#if UNITY_EDITOR
+            Debug.Log("Attempting to share a screenshot with the text \"" + shareText + "\"");
+#elif UNITY_ANDROID
+            using (var sharingJavaClass = new AndroidJavaClass(androidPackageName + "." + androidSharingClassName))
+            {
+                sharingJavaClass.CallStatic(shareScreenshotWithTextMethodName, shareText, filePath, showShareDialogBox, shareDialogBoxText);
+            }
+#elif UNITY_IOS
+            ShareIOS(shareText, filePath);
+#endif
+        }
+
+        /// <summary>
+        /// Shares text
+        /// </summary>
+        /// <param name="shareText">Text to share</param>
+        /// <param name="showShareDialogBox">Should the share dialog be opened (Android only)</param>
+        /// <param name="shareDialogBoxText">The text to show on the share dialog (Android only)</param>
+        public static void ShareText(string shareText, bool showShareDialogBox = true, string shareDialogBoxText = "Select App To Share With")
+        {
+#if UNITY_EDITOR
+            Debug.Log("Attempting to share text \"" + shareText + "\"");
+#elif UNITY_ANDROID
+            using (var sharingJavaClass = new AndroidJavaClass(androidPackageName + "." + androidSharingClassName))
+            {
+                sharingJavaClass.CallStatic(shareTextMethodName, shareText, showShareDialogBox, shareDialogBoxText);
+            }
+#elif UNITY_IOS
+            ShareIOS(shareText, null);
+#endif
+        }
+
+        /// <summary>
+        /// Shows a toast to the user (Android Only, for iOS, use <seealso cref="ShowAlert"/>)
+        /// </summary>
+        /// <param name="toastText">Text to display on the toast</param>
+        /// <param name="shouldLongToastBeShown">Should the toast duration be long?</param>
+        public static void ShowToast(string toastText, bool shouldLongToastBeShown = false)
+        {
+#if UNITY_EDITOR
+            Debug.Log("Attempting to toast text \"" + toastText + "\"");
+#elif UNITY_ANDROID
+            using (var sharingJavaClass = new AndroidJavaClass(androidPackageName + "." + androidSharingClassName))
+            {
+                sharingJavaClass.CallStatic(showToastMethodName, toastText, shouldLongToastBeShown);
+            }
+#endif
+        }
+
+        /// <summary>
+        /// Shows a alert dialog box to the user
+        /// </summary>
+        /// <param name="alertTitle">Title of the alert</param>
+        /// <param name="alertText">Text of the alert</param>
+        /// <param name="dismissButtonText">Text to show on the dismiss button</param>
+        public static void ShowAlert(string alertTitle, string alertText, string dismissButtonText = "OK")
+        {
+#if UNITY_EDITOR
+            Debug.Log("Attempting to open a alert \"" + alertTitle + "\"\r\n\"" + alertText + "\"");
+#elif UNITY_ANDROID
+            using (var sharingJavaClass = new AndroidJavaClass(androidPackageName + "." + androidSharingClassName))
+            {
+                sharingJavaClass.CallStatic(showAlertMethodName, alertTitle, alertText, dismissButtonText);
+            }
+#elif UNITY_IOS
+            AlertMessageIOS(alertTitle, alertText, dismissButtonText);
+#endif
+        }
+
+        #region Android Plugin Calls
+        #region Android Plugin Constants
         /// <summary>
         /// Android package name
         /// </summary>
@@ -17,59 +92,32 @@ namespace UnityNativeShareKit
         /// <summary>
         /// Android class name
         /// </summary>
-        const string androidClassName = "Sharing";
+        const string androidSharingClassName = "Sharing";
 
         /// <summary>
         /// Android method name to call to share a screenshot with text
         /// </summary>
-        const string shareScreenshotWithTextMethodName = "OpenShareDialog";
+        const string shareScreenshotWithTextMethodName = "ShareScreenshotAndText";
+
+        /// <summary>
+        /// Android method name to call to share text
+        /// </summary>
+        const string shareTextMethodName = "ShareText";
+
+        /// <summary>
+        /// Android method name to show a toast
+        /// </summary>
+        const string showToastMethodName = "ShowToast";
+
+        /// <summary>
+        /// Android method name to show a alert
+        /// </summary>
+        const string showAlertMethodName = "ShowAlert";
+        #endregion
         #endregion
 
-        /// <summary>
-        /// Shares a screenshot with text
-        /// </summary>
-        /// <param name="shareText">Text to share</param>
-        /// <param name="filePath">The path to the attached file</param>
-        /// <param name="showShareDialogBox">Should the share dialog be opened (Android only)</param>
-        /// <param name="shareDialogBoxText">The text to show on the share dialog (Android only)</param>
-        public static void ShareScreenshot(string shareText, string filePath, bool showShareDialogBox = true, string shareDialogBoxText = "Select App To Share With")
-        {
-#if UNITY_EDITOR
-            Debug.Log("Attempting to share a screenshot with the text \"" + shareText + "\"");
-#elif UNITY_ANDROID
-            using (var sharingJavaClass = new AndroidJavaClass(packageName + "." + className))
-            {
-                sharingJavaClass.CallStatic(methodName, shareText, filePath, showShareDialogBox, shareDialogBoxText);
-            }
-#elif UNITY_IOS
-            //TODO
-#endif
-        }
 
-        /// <summary>
-        /// Shares multiple files at once
-        /// </summary>
-        /// <param name="shareText">Text to share</param>
-        /// <param name="filePaths">The paths to the attached files</param>
-        /// <param name="url">URL to the attached link</param>
-        /// <param name="subject">Subject of the share (used for Emails)</param>
-        /// <param name="mimeType">The mime type of the content to share
-        ///     <para><seealso cref="https://www.freeformatter.com/mime-types-list.html"/></para></param>
-        /// <param name="showShareDialogBox">Should the share dialog be opened</param>
-        /// <param name="shareDialogBoxText">The text to show on the share dialog</param>
-        public static void ShareMultiple(string shareText, string[] filePaths = null, string url = null, string subject = "", string mimeType = "text/html", bool showShareDialogBox = false, string shareDialogBoxText = "Select sharing app")
-        {
-#if UNITY_ANDROID
-            //ShareAndroid(shareText, filePaths, showShareDialogBox, shareDialogBoxText);
-#elif UNITY_IOS
-            ShareIOS(shareText, subject, url, filePaths);
-#else
-            Debug.Log("No sharing set up for this platform.");
-            Debug.Log("Subject: " + subject);
-            Debug.Log("Body: " + shareText);
-#endif
-        }
-
+        #region iOS Native Calls
 #if UNITY_IOS
         #region Alert
         /// <summary>
@@ -90,7 +138,7 @@ namespace UnityNativeShareKit
             /// <summary>
             /// Alert cancel button text
             /// </summary>
-            public string alertCancelButtonText;
+            public string alertDismissButtonText;
         }
 
         /// <summary>
@@ -105,14 +153,14 @@ namespace UnityNativeShareKit
         /// </summary>
         /// <param name="alertTitle">Alert title</param>
         /// <param name="alertMessage">Alert message</param>
-        /// <param name="alertCancelButtonText">Alert cancel button text</param>
-        public static void AlertMessageIOS(string alertTitle, string alertMessage, string alertCancelButtonText = "OK")
+        /// <param name="alertDismissButtonText">Alert cancel button text</param>
+        public static void AlertMessageIOS(string alertTitle, string alertMessage, string alertDismissButtonText = "OK")
         {
             var alertMessageStruct = new AlertMessageStruct
             {
                 alertTitle = alertTitle,
                 alertMessage = alertMessage,
-                alertCancelButtonText = alertCancelButtonText
+                alertDismissButtonText = alertDismissButtonText
             };
             showAlertMessage(ref alertMessageStruct);
         }
@@ -138,27 +186,21 @@ namespace UnityNativeShareKit
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="body"></param>
-        /// <param name="subject"></param>
-        /// <param name="url"></param>
-        /// <param name="filePaths"></param>
-        public static void ShareIOS(string body, string subject, string url, string[] filePaths)
+        /// <param name="shareText"></param>
+        /// <param name="filePath"></param>
+        public static void ShareIOS(string shareText, string filePath)
         {
             var socialSharingStruct = new SocialSharingStruct
             {
-                text = body
+                text = shareText,
+                filePaths = filePath,
+                //this is kept here so we dont have to change the iOS plugin just yet
+                subject = ""
             };
-
-            var paths = string.Join(";", filePaths);
-
-            if (string.IsNullOrEmpty(paths)) paths = url;
-            else if (!string.IsNullOrEmpty(url)) paths += ";" + url;
-
-            socialSharingStruct.filePaths = paths;
-            socialSharingStruct.subject = subject;
-
+            
             showSocialSharing(ref socialSharingStruct);
         }
 #endif
+        #endregion
     }
 }
