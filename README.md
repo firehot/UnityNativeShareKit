@@ -1,7 +1,7 @@
 # UnityNativeShareKit
 A Unity plugin to open native sharing dialogs on iOS and Android, used mainly for sharing screenshots.
 
-Please note, if you are coming from Unity-Native-Share, that some of the method calls have chaged, this is a part of an ongoing refactor to help make the plugin more modular, which should help with narrowing down bugs and also creating new features without introducing bugs else where, als0 300+ line classes aren't fun or practical.
+Please note, if you are coming from Unity-Native-Share, that some of the method calls have changed, this is a part of an ongoing refactor to help make the plugin more modular, which should help with narrowing down bugs and also creating new features without introducing bugs else where, also 300+ line classes aren't fun or practical.
 
 ## Features
 
