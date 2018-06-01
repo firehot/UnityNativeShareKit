@@ -57,7 +57,7 @@ For iOS builds, you'll need to add a key in the apps `info.plist` for `NSPhotoLi
 #### Android
 The Android plugin requires `android.support-v4:26.1.0` to run.
 
-The Android plugin has support for [Play Services Resolver for Unity](https://github.com/googlesamples/unity-jar-resolver), so no need to go and find the library files manually and worry about library conflicts with other plugins. By default, [Play Services Resolver for Unity](https://github.com/googlesamples/unity-jar-resolver) is not included in the project.
+The Android plugin has support for [Play Services Resolver for Unity](https://github.com/googlesamples/unity-jar-resolver), so no need to go and find the library files manually and worry about library conflicts with other plugins. By default, [Play Services Resolver for Unity](https://github.com/googlesamples/unity-jar-resolver) is not included in the project. Built and tested using [Play Services Resolver v1.2.68.0](https://github.com/googlesamples/unity-jar-resolver/blob/9941cb212b63ee130565b65baf3f0cd69678546b/play-services-resolver-1.2.68.0.unitypackage)
 
 ### Todo
 - [ ] Move all existing issues in the original repo and fix them here
