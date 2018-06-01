@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 264870b7867f2264f8d878dfe4d45dfb
-timeCreated: 1527462810
+timeCreated: 1527808821
 licenseType: Free
 PluginImporter:
   serializedVersion: 2
@@ -25,6 +25,12 @@ PluginImporter:
     data:
       first:
         iPhone: iOS
+      second:
+        enabled: 1
+        settings: {}
+    data:
+      first:
+        tvOS: tvOS
       second:
         enabled: 1
         settings: {}

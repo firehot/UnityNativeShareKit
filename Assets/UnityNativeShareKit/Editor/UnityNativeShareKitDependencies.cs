@@ -37,6 +37,7 @@ public class UnityNativeShareKitDependencies : AssetPostprocessor
     public static object svcSupport;
 #endif  // UNITY_ANDROID
 
+#if UNITY_ANDROID
     /// Initializes static members of the class.
     static UnityNativeShareKitDependencies()
     {
@@ -56,9 +57,7 @@ public class UnityNativeShareKitDependencies : AssetPostprocessor
     /// </summary>
     public static void RegisterDependencies()
     {
-#if UNITY_ANDROID
         RegisterAndroidDependencies();
-#endif
     }
 
     /// <summary>
@@ -102,4 +101,5 @@ public class UnityNativeShareKitDependencies : AssetPostprocessor
             }
         }
     }
+#endif
 }

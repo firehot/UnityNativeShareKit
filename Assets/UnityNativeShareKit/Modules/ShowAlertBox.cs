@@ -15,10 +15,10 @@ namespace UnityNativeShareKit
         string alertTitle = "This is a alert title";
 
         /// <summary>
-        /// Text of the alert
+        /// Message of the alert
         /// </summary>
         [SerializeField]
-        string alertText = "This is a alert text";
+        string alertMessage = "This is a alert message";
 
         /// <summary>
         /// </summary>
@@ -30,7 +30,7 @@ namespace UnityNativeShareKit
         /// </summary>
         public void ShowAlert()
         {
-            NativeWrapper.ShowAlert(alertTitle, alertText, alertDismissButtonText);
+            NativeWrapper.ShowAlert(alertTitle, alertMessage, alertDismissButtonText);
         }
 
     }
