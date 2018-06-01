@@ -6,8 +6,12 @@
 
 #import "iOS_Alert.h"
 
+//
+// Shows an alert to the user
+//
 void showAlert(const char* alertTitle, const char* alertMessage, const char* dismissButtonText){
 
+	//convert const char* to a NSString object
     NSString *title = [NSString stringWithUTF8String:alertTitle];
     NSString *message = [NSString stringWithUTF8String:alertMessage];
     NSString *dismissText = [NSString stringWithUTF8String:dismissButtonText];

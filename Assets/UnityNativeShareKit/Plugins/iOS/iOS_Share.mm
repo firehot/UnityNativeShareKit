@@ -6,11 +6,17 @@
 
 #import "iOS_Share.h"
 
+//
+// Shares Text
+//
 void shareText(const char* shareText)
 {
     shareScreenshotAndText(shareText, "");
 }
 
+//
+// Shares Screenshot and Text
+//
 void shareScreenshotAndText(const char* shareText, const char* imagePath)
 {
     NSString *textToShare = [NSString stringWithUTF8String:shareText];
@@ -18,17 +24,21 @@ void shareScreenshotAndText(const char* shareText, const char* imagePath)
     
     NSMutableArray *items = [NSMutableArray new];
     
+	//Check to see if string is empty or null
     if(textToShare != NULL && textToShare.length > 0) [items addObject:textToShare];
     
+	//Check to see if string is empty or null
     if(pathToImage != NULL && pathToImage.length > 0)
     {
         NSFileManager *fileMgr = [NSFileManager defaultManager];
         
+		//Check to see if the file exists
         if([fileMgr fileExistsAtPath:pathToImage])
         {
             NSURL *formattedURL = [NSURL fileURLWithPath:pathToImage];
             [items addObject:formattedURL];
         }
+		//File not found
         else
         {
             char* alertTitle = (char*)"Error";
@@ -36,6 +46,7 @@ void shareScreenshotAndText(const char* shareText, const char* imagePath)
             char* alertMessage = (char*)[message UTF8String];
             char* alertDismissButtonText = (char*)"OK";
             
+			//Show Alert
             showAlert(alertTitle, alertMessage, alertDismissButtonText);
         }
     }
@@ -53,7 +64,7 @@ void shareScreenshotAndText(const char* shareText, const char* imagePath)
     //iPad share view
     else
     {
-        // Change Rect to position Popover
+		//custom area to show the share popup
         UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activity];
         [popup presentPopoverFromRect:CGRectMake(rootViewController.view.frame.size.width/2, rootViewController.view.frame.size.height/4, 0, 0)inView:rootViewController.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }

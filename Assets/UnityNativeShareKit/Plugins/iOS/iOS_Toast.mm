@@ -6,6 +6,9 @@
 
 #import "iOS_Toast.h"
 
+//
+// Shows a toast to the user
+//
 void showToast(const char* toastText){
 
 }
