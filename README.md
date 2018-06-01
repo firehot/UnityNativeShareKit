@@ -8,6 +8,8 @@ Some of the things that have been removed:
   * Compicated the code
 * Sharing multiple files
   * Also complicated code, and also was inconsistant
+* Sharing Links w/ Text
+  * Never got it to work in the first place
  
 ## Features
 
@@ -59,10 +61,12 @@ The Android plugin requires `android.support-v4:26.1.0` to run.
 
 The Android plugin has support for [Play Services Resolver for Unity](https://github.com/googlesamples/unity-jar-resolver), so no need to go and find the library files manually and worry about library conflicts with other plugins. By default, [Play Services Resolver for Unity](https://github.com/googlesamples/unity-jar-resolver) is not included in the project. Built and tested using [Play Services Resolver v1.2.68.0](https://github.com/googlesamples/unity-jar-resolver/blob/9941cb212b63ee130565b65baf3f0cd69678546b/play-services-resolver-1.2.68.0.unitypackage)
 
-### Todo
+### Todo / Notes
 - [ ] Move all existing issues in the original repo and fix them here
   * [Using a tool called Issue Mover for GitHub](https://github-issue-mover.appspot.com/)
 - [ ] Runtime gifs
+  * [Look into this to create gifs](https://github.com/Maximus5/gif-animate)
+- [ ] [Create generic function that shares any type of file](https://github.com/ChrisMaire/unity-native-sharing/issues/25)
 
 ### Credits
 by Nicholas Sheehan (http://www.twitter.com/NSheehanDev)
@@ -75,16 +79,16 @@ by Nicholas Sheehan (http://www.twitter.com/NSheehanDev)
 
 This software is licensed under the DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE http://www.wtfpl.net/
 
-            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-                    Version 2, December 2004
-
- Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
-
- Everyone is permitted to copy and distribute verbatim or modified
- copies of this license document, and changing it is allowed as long
- as the name is changed.
-
-            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
-
-  0. You just DO WHAT THE FUCK YOU WANT TO.
+                DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+                        Version 2, December 2004
+    
+     Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
+    
+     Everyone is permitted to copy and distribute verbatim or modified
+     copies of this license document, and changing it is allowed as long
+     as the name is changed.
+    
+                DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+       TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+    
+      0. You just DO WHAT THE FUCK YOU WANT TO.
