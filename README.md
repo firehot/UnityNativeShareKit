@@ -32,14 +32,14 @@ Built with `Unity 2017.1.1f1`
 #### Screenshot and text
 Facebook owned apps (Facebook, Messenger, Instagram) cannot share text at all. [Here is more info about it](https://answers.unity.com/questions/871846/can-i-post-to-facebook-with-my-own-text.html)
 
---            | `Android 8.0.0 (OnePlus 3T / OxygenOS 5.0.1)`| `iOS 10.3.3 (iPhone 5C)`              | `iOS 11.3.1 (iPad 2 Air)`
-------------- | ---------------------------------------------| --------------------------------------| ------------------------ 
-Facebook      | No Text                                      | No Text                               | No Text
-Messenger     | No Text                                      | No Text                               | No Text
-Instagram     | No Text                                      | Not Tested                            | N/A
-Twitter       | ✔                                           | No Image                              | ✔
-WhatsApp      | ✔                                           | (WhatsApp not loading properly)       | N/A
-Discord       | ✔                                           | Not Tested                            | Not Tested
+--            | `Android 8.0.0 (OnePlus 3T / OxygenOS 5.0.1)`| `iOS 10.3.3 (iPhone 5C)`               | `iOS 11.3.1 (iPad 2 Air)`
+------------- | ---------------------------------------------| ---------------------------------------| ------------------------ 
+Facebook      | No Text                                      | No Text                                | No Text
+Messenger     | No Text                                      | No Text                                | No Text
+Instagram     | No Text                                      | No Text (Needs Access to Photo Library)| No Text (Needs Access to Photo Library)
+Twitter       | ✔                                           | ✔                                     | ✔
+WhatsApp      | ✔                                           | (WhatsApp not loading properly)        | N/A
+Discord       | ✔                                           | ✔                                     | ✔
 
 ### Platform Notes
 #### iOS

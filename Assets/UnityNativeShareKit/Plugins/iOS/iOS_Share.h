@@ -7,17 +7,17 @@
 #import "UnityAppController.h"
 #import "iOS_Alert.h"
 
-@interface iOS_Share : UIViewController
-{
-    UINavigationController *navController;
-}
+#ifdef UNITY_4_0 || UNITY_5_0
+#import "iPhone_View.h"
+#else
+extern UIViewController* UnityGetGLViewController();
+#endif
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-    void shareScreenshotWithText(const char* shareText, const char* imagePath);
+    void shareScreenshotAndText(const char* shareText, const char* imagePath);
     void shareText(const char* shareText);
 #ifdef __cplusplus
 }
 #endif
-@end
