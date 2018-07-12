@@ -18,7 +18,7 @@ namespace UnityNativeShareKit
 #elif UNITY_ANDROID
             using (var sharingJavaClass = new AndroidJavaClass(androidPackageName + "." + androidSharingClassName))
             {
-                sharingJavaClass.CallStatic(shareScreenshotWithTextMethodName, textToShare, filePath, showShareDialogBox, shareDialogBoxText);
+                sharingJavaClass.CallStatic(shareScreenshotWithTextMethodName, shareText, filePath, showShareDialogBox, shareDialogBoxText);
             }
 #elif UNITY_IOS
             shareScreenshotAndText(shareText, filePath);
