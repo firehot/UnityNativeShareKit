@@ -19,9 +19,9 @@ Some of the things that have been removed:
 - Show Toasts (Android Only, Looking into iOS equivalent)
 
 ## Usage:
-To use, call the Share method in [NativeShare.cs](UnityNativeShareKit/Assets/Plugins/NativeShare.cs). See the comments in [NativeShare.cs](UnityNativeShareKit/Assets/Plugins/NativeShare.cs) for details.
+To use, call the Share method in [NativeWrapper.cs](Assets/UnityNativeShareKit/Plugins/NativeWrapper.cs). See the comments in [NativeWrapper.cs](Assets/UnityNativeShareKit/Plugins/NativeWrapper.cs) for details.
 
-You can hook into the actions in [Test.cs](Assets/Native%20Share%20Demo%20Scene/Test.cs) to get callbacks for when the screenshot is about to be taken, and when it has been taken. The callbacks can also be accessed via the Inspector.
+You can hook into the actions in the provided scripts in the [Modules](Assets/UnityNativeShareKit/Modules/) folder to get callbacks for when the screenshot is about to be taken, and when it has been taken. The callbacks can also be accessed via the Inspector.
 This can be useful if you need to disable some UI or banner ads and create nice screenshots for sharing.
 
 Unity screenshots are run asynchronously and as such you will need to check that the file has been written, or put a delay between capturing the screenshot and sharing it using a coroutine. Otherwise you will likely end up trying to access a file that does not yet exist or will access a previous version of the screenshot.
@@ -64,8 +64,6 @@ The Android plugin has support for [Play Services Resolver for Unity](https://gi
 ### Todo / Notes
 - [ ] Move all existing issues in the original repo and fix them here
   * [Using a tool called Issue Mover for GitHub](https://github-issue-mover.appspot.com/)
-- [ ] Runtime gifs
-  * [Look into this to create gifs](https://github.com/Maximus5/gif-animate)
 - [ ] [Create generic function that shares any type of file](https://github.com/ChrisMaire/unity-native-sharing/issues/25)
 
 ### Credits
@@ -73,7 +71,7 @@ by Nicholas Sheehan (http://www.twitter.com/NSheehanDev)
 
 [www.NicholasSheehan.co.uk](www.NicholasSheehan.co.uk)
 
-[If you find this repo helpful, please consider donating to help me spend more time maintaning and expaning the plugin!](https://www.paypal.me/NicholasSheehan/5.00)
+[If you find this repo helpful, please consider donating to help me spend more time maintaning and expanding the plugin!](https://www.paypal.me/NicholasSheehan/5.00)
 
 [Repo forked from unity-native-sharing](https://github.com/ChrisMaire/unity-native-sharing)
 
